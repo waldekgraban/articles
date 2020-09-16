@@ -43,15 +43,15 @@ Aby się odsubskrybować należy na wszystkich subskrypcjach wywołać metodę *
 Strumienie w RxJs mogą być skończone lub nieskończone (ang. *finite/infinite*). Kiedy strumień jest skończony wtedy emituje wartość i kończy się. **Zakończenie strumienia powoduje, że każdy subskrybent zostanie automatycznie odsubskrybowany**. Przykładem takiego automatycznie kończącego się strumienia jest *HttpClient*.
 
 	getBooks$() {
-		return this.httpClient.get('api/books');
-	}
-
-	ngOnInit() {
-		this.getBooks$().subscribe(books => {
-			this.books = books;
-		});
+	    return this.httpClient.get('api/books');
 	}
 	
+	ngOnInit() {
+	    this.getBooks$().subscribe(books => {
+	        this.books = books;
+	    });
+	}
+    
 W powyższym przykładzie nie jest konieczne ręczne odsubskrybowanie się, ponieważ strumień HttpClient jest skończony. Przykładem innego skończonego strumienia jest *timer*.
 
 Właściwie **wszystkie inne strumienie są nieskończone**. Oznacza to, że będą emitować wartości bez końca. Jeżeli się od nich nie odsubskrybujesz stworzysz wyciek pamięci. Dotyczy to szczególnie strumieni takich jak:
@@ -77,48 +77,50 @@ Jak ustaliliśmy, praktycznie wszystkie strumienie w Angularze są nieskończone
 Podstawowym sposobem na odsubskrybowanie się jest oczywiście wywołanie metody *.unsubscribe()*. Przeważnie robimy to w „destruktorze” komponentu czyli metodzie *ngOnDestroy*:
 
 	export class AppComponent implements OnInit, OnDestroy {
-		counter = 0;
-		private subscription!: Subscription;
+	    counter = 0;
 
-		constructor(private counterService: CounterService) {}
-
-		ngOnInit() {
-			this.subscription = this.counterService.getCounter$().subscribe(value => {
-				this.counter = value;
-			});
-		}
-
-		ngOnDestroy() {
-			if (!this.subscription.closed) {
-				this.subscription.unsubscribe();
-			}
-		}
+	    private subscription!: Subscription;
+	    
+	    constructor(private counterService: CounterService) {}
+	    
+	    ngOnInit() {
+	        this.subscription = this.counterService.getCounter$().subscribe(value => {
+	            this.counter = value;
+	        });
+	    }
+	    
+	    ngOnDestroy() {
+	        if (!this.subscription.closed) {
+	            this.subscription.unsubscribe();
+	        }
+	    }
 	}
 
-Jest to oczywiście mechanizm poprawny.  Warto dodać, że próba ponownego odsubskrybowania subskrypcji spowoduje rzucenie wyjątku, dlatego warto się na taki wypadek ubezpieczyć i sprawdzać wartość atrybutu closed. Czy zawsze mamy panowanie nad tym, czy subskrypcja została już odsubskrybowana? – nie. Ktoś mógł przecież wywołać *.completed()*.
+Jest to oczywiście mechanizm poprawny.    Warto dodać, że próba ponownego odsubskrybowania subskrypcji spowoduje rzucenie wyjątku, dlatego warto się na taki wypadek ubezpieczyć i sprawdzać wartość atrybutu closed. Czy zawsze mamy panowanie nad tym, czy subskrypcja została już odsubskrybowana? – nie. Ktoś mógł przecież wywołać *.completed()*.
 
 Gdy subskrypcji mamy więcej wtedy robi się mały bałagan. Ja przeważnie **tworzę dedykowaną tablicę subskrypcji** i załatwiam wszystko za jednym zamachem:
 
 	export class AppComponent implements OnInit, OnDestroy {
-		couter = 0;
-		private subscriptions: Subscription[] = [];
-		
-		constructor(private counterService: CounterService) {}
-		
-		ngOnInit() {
-			this.subscriptions.push(
-				this.counterService.getCounter$().subscribe(value => {
-					this.counter = value;
-				})
-			);
+	    couter = 0;
 
-			this.subscriptions.push(...);
-			this.subscriptions.push(...);
-		}
-		
-		ngOnDestroy() {
-			this.subscriptions.forEach(e => !e.closed ? e.unsubscribe() : null);
-		}
+	    private subscriptions: Subscription[] = [];
+	    
+	    constructor(private counterService: CounterService) {}
+	    
+	    ngOnInit() {
+	        this.subscriptions.push(
+	            this.counterService.getCounter$().subscribe(value => {
+	                this.counter = value;
+	            })
+	        );
+	        
+	        this.subscriptions.push(...);
+	        this.subscriptions.push(...);
+	    }
+	    
+	    ngOnDestroy() {
+	        this.subscriptions.forEach(e => !e.closed ? e.unsubscribe() : null);
+	    }
 	}
 
 ### 2. Operator takeUntil()
@@ -128,24 +130,25 @@ Bardzo ciekawym mechanizmem jest zastosowanie operatora *.takeUntil()*. Przyjmuj
 W praktyce tworzymy sobie nowy *Subject* o nazwie *$destroyed*. Następnie we wszystkich naszych subskrypcjach korzystamy z operatora *takeUntil()*, i przekazujemy mu *$destroyed* jako parametr funkcji. W *ngOnDestroy* komponentu/serwisu emitujemy dowolną wartość strumienia *$destroyed*, czym powodujemy automatyczne odsubskrybowanie wszystkich subskrypcji.
 
 	export class AppComponent implements OnInit, OnDestroy {
-		counter = 0;
-		private destroyed$ = new Subject();
+	    counter = 0;
 
-		constructor(private counterService: CounterService) {}
-
-		ngOnInit() {
-			this.counterService.getCounter$()
-				.pipe(
-					takeUntil(this.destroyed$)
-				)
-				.subscribe(value => {
-					this.counter = value;
-				});
-		}
-
-		ngOnDestroy() {
-			this.destroyed$.next();
-		}
+	    private destroyed$ = new Subject();
+	    
+	    constructor(private counterService: CounterService) {}
+	    
+	    ngOnInit() {
+	        this.counterService.getCounter$()
+	            .pipe(
+	                takeUntil(this.destroyed$)
+	            )
+	            .subscribe(value => {
+	                this.counter = value;
+	            });
+	    }
+	    
+	    ngOnDestroy() {
+	        this.destroyed$.next();
+	    }
 	}
 
 ### 3. Operator takeWhile()
@@ -158,24 +161,25 @@ Korzystając z operatora **takeWhile()**, subskrypcja zostanie przerwana dopiero
 Przykładowy kod wygląda następująco:
 
 	export class AppComponent implements OnInit, OnDestroy {
-		counter = 0;
-		private alive = true;
+	    counter = 0;
 
-		constructor(private counterService: CounterService) {}
-
-		ngOnInit() {
-			this.counterService.getCounter$()
-				.pipe(
-					takeWhile(() => this.alive),
-				)
-				.subscribe(value => {
-					this.counter = value;
-				});
-		}
-
-		ngOnDestroy() {
-			this.alive = false;
-		}
+	    private alive = true;
+	    
+	    constructor(private counterService: CounterService) {}
+	    
+	    ngOnInit() {
+	        this.counterService.getCounter$()
+	            .pipe(
+	                takeWhile(() => this.alive),
+	            )
+	            .subscribe(value => {
+	                this.counter = value;
+	            });
+	    }
+	    
+	    ngOnDestroy() {
+	    	this.alive = false;
+	    }
 	}
 
 W powyższym kodzie ustawiając flagę *this.alive* na *false*, nie mamy wpływu na to, czy strumień *getCounter$()* wyemituje. Jeżeli nie wyemituje (co prawdopodobnie się stanie) wtedy mamy wyciek pamięci – subskrypcja nie zostanie odsubskrybowana.
@@ -189,19 +193,19 @@ Operator *take(1)* powoduje, że subskrypcja zostanie automatycznie odsubskrybow
 Ten operator służy raczej jako pewna sztuczka, kiedy chcemy nieskończony strumień zamienić na skończony – tzn. odsubskrybować automatycznie po pierwszym emicie. Oczywiście należy podkreślić, że bazowy strumień nie zostanie zakończony, odsubskrybuje się jedynie sybskrypcja:
 
 	export class AppComponent implements OnInit {
-		counter = 0;
-
-		constructor(private counterService: CounterService) {}
-
-		ngOnInit() {
-			this.counterService.getCounter$()
-				.pipe(
-					take(1)
-				)
-				.subscribe(value => {
-					this.counter = value;
-				});
-		}
+	    counter = 0;
+	    
+	    constructor(private counterService: CounterService) {}
+	    
+	    ngOnInit() {
+	        this.counterService.getCounter$()
+	            .pipe(
+	                take(1)
+	            )
+	            .subscribe(value => {
+	                this.counter = value;
+	            });
+	    }
 	}
 
 Istnieje też operator *first()*, jednak nie polecam go używać. Nie jest on tak bezpieczny jak *take(1)*. Różnica polega na tym, że rzuci wyjątkiem w przypadku emitowania wartości *NULL*, oraz w przypadku kiedy strumień wcale nie wyemituje wartości i zostanie zakończony.
@@ -211,17 +215,17 @@ Istnieje też operator *first()*, jednak nie polecam go używać. Nie jest on ta
 W Angularze jest dostępny pipe o nazwie *async*. Umożliwia on pobranie wartości ze strumienia bez konieczności subskrybowania się do niego. Tak naprawdę subskrypcja zostanie utworzona niejawnie przez sam kompilator, jednak my nie musimy się zajmować jej sprzątaniem:
 
 	@Component({
-		selector: 'app-component',
-		template: `Wartość licznika: {% raw %}{{{% endraw %} counter$ | async }}`
+	    selector: 'app-component',
+	    template: `Wartość licznika: {% raw %}{{{% endraw %} counter$ | async }}`
 	})
 	export class AppComponent implements OnInit {
-		counter$!: Observable;
-
-		constructor(private counterService: CounterService) {}
-
-		ngOnInit() {
-			this.counter$ = this.counterService.getCounter$();
-		}
+	    counter$!: Observable;
+	    
+	    constructor(private counterService: CounterService) {}
+	    
+	    ngOnInit() {
+	        this.counter$ = this.counterService.getCounter$();
+	    }
 	}
 
 Używanie tego pipa jest najbardziej pożądaną formą obsługi strumieni RxJs w Angularze. Za jego pomocą możemy osiągnąć właściwie wszystko czego potrzebujemy. Oto zalety *async*:
@@ -242,31 +246,31 @@ Później odkryłem, że strumień zwracany przez metodę jest nieskończony. Au
 Rozszerzając *prototype* klasy *Observable<T>* uzyskujemy efekt bardzo podobny do metod rozszerzających:
 
 	declare module 'rxjs' {
-		export interface Observable<T> {
-			subscribeFirst(next?: (value: T) => void, error?: (error: any) => void, complete?: () => void): Unsubscribable;
-		}
+	    export interface Observable<T> {
+	        subscribeFirst(next?: (value: T) => void, error?: (error: any) => void, complete?: () => void): Unsubscribable;
+	    }
 	}
-
+	
 	Observable.prototype.subscribeFirst = function<T>(
-		this: Observable<T>,
-		next?: (value: T) => void,
-		error?: (error: any) => void,
-		complete?: () => void) {
-			return this.pipe(take(1)).subscribe(next, error, complete);
+	    this: Observable<T>,
+	    next?: (value: T) => void,
+	    error?: (error: any) => void,
+	    complete?: () => void) {
+	        return this.pipe(take(1)).subscribe(next, error, complete);
 	};
 
 Po pierwsze rozszerzyłem tu typowanie o nową funkcję, a po drugie dodałem definicje prostej funkcji, która hermetyzuje użycie operatora *take(1)*. Dzięki takiemu zabiegowi każda instancja strumienia posiada funkcję *subscribeFirst()*, która zwróci pierwszą wartość i automatycznie się odsubskrybuje:
 
 	export class AppComponent implements OnInit {
-		counter!: number;
-		
-		constructor(private counterService: CounterService) { }
-		
-		ngOnInit() {
-			this.counterService.getCounter$().subscribeFirst(val => {
-				this.counter = val;
-			});
-		}
+	    counter!: number;
+	    
+	    constructor(private counterService: CounterService) { }
+	    
+	    ngOnInit() {
+	        this.counterService.getCounter$().subscribeFirst(val => {
+	            this.counter = val;
+	        });
+	    }
 	}
 
 Taki zabieg oczywiście nie wszędzie jest potrzebny. U mnie sprawdził się wyśmienicie, ponieważ **dzięki temu nie musiałem 20 subskrypcji w aplikacji obklejać dodatkowymi operatorami**, a zawsze interesowała mnie pierwsza i jedyna wartość.
@@ -314,9 +318,9 @@ JS będzie umiał ogarnąć powyższe przypadki, ponieważ zliczając referencj�
 Silnik JS nie będzie potrafił zwolnić zasobów ze sterty w następujących sytuacjach:
 
 - kiedy instancja strumienia jest utworzona w serwisie należącym do *injectora* wyżej, niż komponent z subskrypcją:
-	- serwis zadeklarowany w *AppModule*
-	- serwis zadeklarowany jako *providedIn: 'root'*
-	- serwis zadeklarowany w jakimkolwiek komponencie rodzica
+    - serwis zadeklarowany w *AppModule*
+    - serwis zadeklarowany jako *providedIn: 'root'*
+    - serwis zadeklarowany w jakimkolwiek komponencie rodzica
 - kiedy instancja strumienia jest utworzona w innym leniwym module
 - kiedy instancja strumienia jest utworzona na podstawie zdarzenia (*fromEvent*)
 - kiedy instancja strumienia pochodzi z klasy *Router*
