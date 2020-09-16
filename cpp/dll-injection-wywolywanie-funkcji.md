@@ -57,21 +57,21 @@ Można to też odczytać podczas analizy gry w debbugerze. Wszystkie wywołania 
 Oto pusty szkielet pliku DLL, na jakim będziemy się wzorować:
 
 	#include <windows.h>
-
+	
 	extern "C" BOOL __stdcall DllMain(HMODULE hDLL, DWORD Reason, LPVOID Reserved)
 	{
-		switch(Reason)
-		{
-			case DLL_PROCESS_ATTACH:
-				MessageBox(0,"DLL załadowana","komunikat",0);
-				break;
-	
-			case DLL_PROCESS_DETACH:
-				MessageBox(0,"DLL wyrzucona z pamięci","komunikat",0);
-				break;
-		}
-		
-		return 0;
+	    switch(Reason)
+	    {
+	        case DLL_PROCESS_ATTACH:
+	            MessageBox(0,"DLL załadowana","komunikat",0);
+	            break;
+	    
+	        case DLL_PROCESS_DETACH:
+	            MessageBox(0,"DLL wyrzucona z pamięci","komunikat",0);
+	            break;
+	    }
+	    
+	    return 0;
 	}
 
 Podczas załadowania biblioteki wykonywana jest instrukcja _DLL_PROCESS_ATTACH_, podczas zamknięcia _DLL\_PROCESS\_DETACH_. Istnieją także inne przełączniki ale nie będą wykorzystane w tym artykule. *extern &#8222;C&#8221; BOOL __stdcall DllMain* jest wymagany w kompilatorze **Code::Blocks**, jeżeli korzystasz z MVC wystarczy zwykłe *BOOL DllMain*.
@@ -80,23 +80,23 @@ Aby móc wywołać funkcję, której adres posiadamy, niezbędne jest stworzenie
 
 	void WygranaPrzegrana(int flaga)
 	{
-		typedef void (__stdcall *wygrana)(DWORD); // deklaracja wskaznika
-		wygrana startWygrana = (wygrana)(0x0100347C); // przypisanie do wskaznika
-		startWygrana(flaga); // wywolanie
+	    typedef void (__stdcall *wygrana)(DWORD); // deklaracja wskaznika
+	    wygrana startWygrana = (wygrana)(0x0100347C); // przypisanie do wskaznika
+	    startWygrana(flaga); // wywolanie
 	}
-
+	
 	void Okno1()
 	{
-		typedef void (__stdcall *okno1)(); // deklaracja wskaznika
-		okno1 startOkno1 = (okno1)(0x01003505); // przypisanie do wskaznika
-		startOkno1(); // wywolanie
+	    typedef void (__stdcall *okno1)(); // deklaracja wskaznika
+	    okno1 startOkno1 = (okno1)(0x01003505); // przypisanie do wskaznika
+	    startOkno1(); // wywolanie
 	}
-
+	
 	void Informacja()
 	{
-		typedef void (__stdcall *informacje)(); // deklaracja wskaznika
-		informacje startInformacja = (informacje)(0x01003D1D); // przypisanie do wskaznika
-		startInformacja(); // wywolanie
+	    typedef void (__stdcall *informacje)(); // deklaracja wskaznika
+	    informacje startInformacja = (informacje)(0x01003D1D); // przypisanie do wskaznika
+	    startInformacja(); // wywolanie
 	}
 
 Dodajmy do naszej biblioteki główną funkcje, którą potem wstrzykniemy do programu. Robimy to podczas ładowania biblioteki. Tworzymy nowy wątek _(CreateThread)_ wskazujący na funkcję główną o nazwie _Funkcja_saper_. W naszej głównej funkcji moglibyśmy się pokusić o skorzystanie z _SetTimer_ ale niepotrzebnie wydłużyło by to kod. Skorzystamy z mniej bezpiecznego rozwiązania, zapętlonej pętli opóźnianej za pomocą funkcji _Sleep_. Zadaniem pętli będzie przechwytywanie wcisniętych klawiszy i kojarzenie ich z odpowiednimi zadaniami.
@@ -106,10 +106,9 @@ Dodajmy do naszej biblioteki główną funkcje, którą potem wstrzykniemy do pr
 	#define KLAWISZ_TRZY 0x33
 	#define KLAWISZ_CZTERY 0x34
 	#define KLAWISZ_PIEC 0x35
-	#include <windows.h>
+	#include <windows.h>	
 
 	DWORD WINAPI Funkcja_saper(LPVOID);
-
 	HMODULE hModule;
 
 	void WygranaPrzegrana(int flaga);
@@ -120,67 +119,55 @@ Dodajmy do naszej biblioteki główną funkcje, którą potem wstrzykniemy do pr
 	// glowna funkcja DLLki
 	extern "C" BOOL __stdcall DllMain(HMODULE hDLL, DWORD Reason, LPVOID Reserved)
 	{
-		switch(Reason)
-		{
-			case DLL_PROCESS_ATTACH:
-				hModule = hDLL;
-				CreateThread(NULL, NULL, &Funkcja_saper, NULL, NULL, NULL); // odpalamy wątek
-				MessageBox(0,"DLLka zaladowana","komunikat",0);
-				break;
-
-			case DLL_PROCESS_DETACH:
-				MessageBox(0,"DLLka usunieta","komunikat",0);
-				break;
-		}
-
-		return TRUE;
-	}
-
+	    switch(Reason)
+	    {
+	        case DLL_PROCESS_ATTACH:
+	            hModule = hDLL;
+	            CreateThread(NULL, NULL, &Funkcja_saper, NULL, NULL, NULL); // odpalamy wątek
+	            MessageBox(0,"DLLka zaladowana","komunikat",0);
+	            break;	
+	        case DLL_PROCESS_DETACH:
+	            MessageBox(0,"DLLka usunieta","komunikat",0);
+	            break;
+	    }
+	    return TRUE;
+	}	
 	// funkcja wątku
 	DWORD WINAPI Funkcja_saper(LPVOID)
 	{
-		while(1)
-		{
-			if(GetAsyncKeyState(KLAWISZ_JEDEN))
-				WygranaPrzegrana(1);    // 1 wygrana
-
-			if(GetAsyncKeyState(KLAWISZ_DWA))
-				WygranaPrzegrana(0);    // 0 przegrana
-
-			if(GetAsyncKeyState(KLAWISZ_TRZY))
-				Okno1();
-
-			if(GetAsyncKeyState(KLAWISZ_CZTERY))
-				Informacja();
-
-			if(GetAsyncKeyState(KLAWISZ_PIEC)) //wywalamy biblioteke
-				FreeLibraryAndExitThread(hModule, 0);
-
-			Sleep(50);
-		}
-
-		return 0;
-	}
-
+	    while(1)
+	    {
+	        if(GetAsyncKeyState(KLAWISZ_JEDEN))
+	            WygranaPrzegrana(1);    // 1 wygrana	
+	        if(GetAsyncKeyState(KLAWISZ_DWA))
+	            WygranaPrzegrana(0);    // 0 przegrana	
+	        if(GetAsyncKeyState(KLAWISZ_TRZY))
+	            Okno1();	
+	        if(GetAsyncKeyState(KLAWISZ_CZTERY))
+	            Informacja();	
+	        if(GetAsyncKeyState(KLAWISZ_PIEC)) //wywalamy biblioteke
+	            FreeLibraryAndExitThread(hModule, 0);	
+	        Sleep(50);
+	    }	
+	    return 0;
+	}	
 	void WygranaPrzegrana(int flaga)
 	{
-		typedef void (__stdcall *wygrana)(DWORD); // deklaracja wskaznika
-		wygrana startWygrana = (wygrana)(0x0100347C); // przypisanie do wskaznika
-		startWygrana(flaga); // wywolanie
-	}
-
+	    typedef void (__stdcall *wygrana)(DWORD); // deklaracja wskaznika
+	    wygrana startWygrana = (wygrana)(0x0100347C); // przypisanie do wskaznika
+	    startWygrana(flaga); // wywolanie
+	}	
 	void Okno1()
 	{
-		typedef void (__stdcall *okno1)(); // deklaracja wskaznika
-		okno1 startOkno1 = (okno1)(0x01003505); // przypisanie do wskaznika
-		startOkno1(); // wywolanie
-	}
-
+	    typedef void (__stdcall *okno1)(); // deklaracja wskaznika
+	    okno1 startOkno1 = (okno1)(0x01003505); // przypisanie do wskaznika
+	    startOkno1(); // wywolanie
+	}	
 	void Informacja()
 	{
-		typedef void (__stdcall *informacje)(); // deklaracja wskaznika
-		informacje startInformacja = (informacje)(0x01003D1D); // przypisanie do wskaznika
-		startInformacja(); // wywolanie
+	    typedef void (__stdcall *informacje)(); // deklaracja wskaznika
+	    informacje startInformacja = (informacje)(0x01003D1D); // przypisanie do wskaznika
+	    startInformacja(); // wywolanie
 	}
 
 Po kompilacji kodu powinien pokazać się **plik DLL** ważący od 6-7kb. Nie zapomnij dodać przełącznika _BUILDING_DLL_ do kompilatora (powinien zrobić to automatycznie podczas wyboru projektu DLL).

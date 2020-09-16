@@ -66,10 +66,10 @@ Zajmijmy się treścią komunikatu. Zaznaczamy około _15_ linii w codecave (jed
 Zapiszmy tytuł komunikatu, znów zaznaczamy dowolną ilość linii, edytujemy i wpisujemy tytuł. Klikamy OK a następnie na klawiaturze skrót _CTRL+A_. Teraz zajmiemy się wyświetlaniem komunikatu. Struktura funkcji wygląda następująco:
 
 	int WINAPI MessageBox(
-		__in_opt  HWND hWnd,
-		__in_opt  LPCTSTR lpText,
-		__in_opt  LPCTSTR lpCaption,
-		__in      UINT uType
+	    __in_opt  HWND hWnd,
+	    __in_opt  LPCTSTR lpText,
+	    __in_opt  LPCTSTR lpCaption,
+	    __in      UINT uType
 	);
 
 Funkcja przyjmuje _4_ parametry, z czego pierwszy może wynosić 0 i ostatni 0 (struktura dostępna i opisana na MSDN, pamiętaj że wartości na stos trafiają w **odwrotnej kolejności** niż mówi o tym struktura funkcji). Przejdź do dowolnej pustej linii i kliknij dwukrotnie. Pokaże się okienko do wpisania instrukcji. Pierwszym argumentem może być 0, więc dodajemy __ do stosu wpisując w okienku _PUSH 0_. Drugim parametrem jest tytuł więc dodajemy do stosu adres (pierwsza kolumna) pod jakim zapisaliśmy wcześniej tytuł komunikatu, u mnie jest to adres _1004A67_. Wpisz w okienku _PUSH (adr\_tytuł\_komunikatu)_ np. _PUSH 1004A67_. Na stos dodajemy jeszcze adres treść komunikatu oraz parametr czwarty czyli. Na końcu dodajemy rozkaz _call user32.MessageBoxA_ &#8211; wywoła on komunikat. Całość powinna wyglądać tak:
@@ -89,8 +89,8 @@ Kliknij dwukrotnie na pierwszą linijkę funkcji w debbugerze (adres _0100346A_)
 
 Zauważ, że zostały dodane automatycznie rozkazy _NOP_. Zapisz adres ostatniego z nich na boku (u mnie _1003473_, widać na obrazku). Kliknij na pierwszą czerwoną linijkę (rozkaz _JMP_) i naciśnij _ENTER_. Zostałeś przeniesiony do naszego kodu. Zauważ, że zamiast wywołania funkcji nadpisującej ilość min, wywoływany jest skok na nasz kod w codecave. Oznacza to że ilość min przestanie być aktualizowana. Musimy naprawić aktualizację min czyli wywołać oryginalną funkcję, którą zastąpiliśmy skokiem (obrazek wyżej). Kazałem zapisać Ci _4_ pierwsze linijki przed nadpisaniem funkcji, teraz będą nam one potrzebne. Pierwsze dwie nadpisane linijki to:
 
-	0100346A	/$>MOV EAX,DWORD PTR SS:[ESP+4]
-	0100346E	|.>ADD DWORD PTR DS:[1005194], EAX
+	0100346A    /$>MOV EAX,DWORD PTR SS:[ESP+4]
+	0100346E    |.>ADD DWORD PTR DS:[1005194], EAX
 
 Pierwsza linijka (rozkaz _MOV_) dodaje do rejestru wartość ze wskaźnika stosu _SS:[ESP+4]_. Druga linijka odpowiedzialna jest za dodanie wartości z rejestru do zmiennej wyświetlającej ilość min. Jest to właśnie sedno naszej funkcji modyfikującej ilość min (pamiętasz adres _0100346E_ z 1 części artykułu?). W naszym kodzie po wywołaniu komunikatu (_CALL user32.messageboxa_) znajduje się puste pole _(DB 00)_. Kliknij na nie dwukrotnie i wklej rozkaz _MOV EAX,DWORD PTR SS:[ESP+4]_, następnie w nowej linii wklej _ADD DWORD PTR DS:[1005194],EAX_, dzięki temu licznik min odzyska swoją funkcjonalność. Następnie w kolejnej linii wykonaj skok na instrukcję _NOP_ (obrazek wyżej), której adres przed chwilą zapisałeś (u mnie _1003473_). W tym celu wpisz w okienku _JMP 1003473_ i kliknij _OK_. Cały nasz dodatkowy kod powinien wyglądać tak (Ty masz inne adresy):
 

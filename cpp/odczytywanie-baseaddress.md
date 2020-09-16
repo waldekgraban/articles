@@ -38,63 +38,63 @@ Chcę pokazać metodę odczytania **adresu bazowego** w C++. Przyda się to Twó
 	#include <windows.h>
 	#include <tlhelp32.h>
 	#include "psapi.h"
-
+	
 	using namespace std;
-
+	
 	char* GetExeName (int pid);
 	DWORD GetModuleBase(LPSTR lpModuleName, DWORD dwProcessId);
-
+	
 	int main ()
 	{
-		HWND hSaper = FindWindow("Saper",NULL);
-		DWORD BaseAddr;
-
-		if (hSaper)
-		{
-			DWORD* processID = new DWORD;
-			GetWindowThreadProcessId(hSaper, processID);
-			BaseAddr = GetModuleBase(GetExeName(*processID), *processID);
-		}
-
-		cout << "BaseAddres okna Saper to: " << BaseAddr << endl;
-
-		system ("pause >nul");
-		return 0;
+	    HWND hSaper = FindWindow("Saper",NULL);
+	    DWORD BaseAddr;
+	
+	    if (hSaper)
+	    {
+	        DWORD* processID = new DWORD;
+	        GetWindowThreadProcessId(hSaper, processID);
+	        BaseAddr = GetModuleBase(GetExeName(*processID), *processID);
+	    }
+	
+	    cout << "BaseAddres okna Saper to: " << BaseAddr << endl;
+	
+	    system ("pause >nul");
+	    return 0;
 	}
-
+	
 	char* GetExeName (int pid)
 	{
-		char szProcessName[254];
-		HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid);
-
-		if (NULL != hProcess)
-			GetModuleBaseName(hProcess, NULL, szProcessName, sizeof(szProcessName)/sizeof(char));
-
-		CloseHandle(hProcess);
-		return szProcessName;
+	    char szProcessName[254];
+	    HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid);
+	
+	    if (NULL != hProcess)
+	        GetModuleBaseName(hProcess, NULL, szProcessName, sizeof(szProcessName)/sizeof(char));
+	
+	    CloseHandle(hProcess);
+	    return szProcessName;
 	}
-
+	
 	DWORD GetModuleBase(LPSTR lpModuleName, DWORD dwProcessId)
 	{
-		MODULEENTRY32 lpModuleEntry = {0};
-		HANDLE hSnapShot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, dwProcessId);
-
-		if(!hSnapShot)
-			return NULL;
-
-		lpModuleEntry.dwSize = sizeof(lpModuleEntry);
-		BOOL bModule = Module32First(hSnapShot, &lpModuleEntry);
-		while(bModule)
-		{
-			if(!strcmp(lpModuleEntry.szModule, lpModuleName))
-			{
-				CloseHandle(hSnapShot);
-				return (DWORD)lpModuleEntry.modBaseAddr;
-			}
-			bModule = Module32Next(hSnapShot, &lpModuleEntry);
-		}
-		CloseHandle(hSnapShot);
-		return NULL;
+	    MODULEENTRY32 lpModuleEntry = {0};
+	    HANDLE hSnapShot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, dwProcessId);
+	
+	    if(!hSnapShot)
+	        return NULL;
+	
+	    lpModuleEntry.dwSize = sizeof(lpModuleEntry);
+	    BOOL bModule = Module32First(hSnapShot, &lpModuleEntry);
+	    while(bModule)
+	    {
+	        if(!strcmp(lpModuleEntry.szModule, lpModuleName))
+	        {
+	            CloseHandle(hSnapShot);
+	            return (DWORD)lpModuleEntry.modBaseAddr;
+	        }
+	        bModule = Module32Next(hSnapShot, &lpModuleEntry);
+	    }
+	    CloseHandle(hSnapShot);
+	    return NULL;
 	}
 
 Uwaga! Przed kompilacją należy dodać do linkera plik *libpsapi.a*!

@@ -37,31 +37,31 @@ Kolejnym krokiem jest użycie naszej właściwej funkcji *ReadProcessMemory*. Je
 
 	int main()
 	{
-		int miny = 0x1005194; //adres min
-		int czas = 0x100579C; //adres czasu
-		
-		long ilosc_czas = 0;
-		long ilosc_miny = 0;
-		
-		DWORD processId;
-		HANDLE hProcess;
-		
-		HWND hSaper = FindWindow("Saper", NULL); //hwnd okna
-		
-		if(hSaper) //jezeli gra jest uruchomiona
-		{
-			GetWindowThreadProcessId(hSaper, &processId); //pobieramy uchwyt
-			hProcess = OpenProcess(PROCESS_VM_READ, false, processId);
-			ReadProcessMemory(hProcess, (LPVOID)czas, &ilosc_czas, sizeof(long), 0); //odczytujemy
-			ReadProcessMemory(hProcess, (LPVOID)miny, &ilosc_miny, sizeof(long), 0); //odczytujemy
-			CloseHandle(hProcess);
-		}
-		
-		cout << "Aktualna ilosc min: " << ilosc_miny << endl;
-		cout << "Aktualna wartosc czasu: " << ilosc_czas << endl;
-		
-		system("PAUSE >nul");
-		return(0);
+	    int miny = 0x1005194; //adres min
+	    int czas = 0x100579C; //adres czasu
+	    
+	    long ilosc_czas = 0;
+	    long ilosc_miny = 0;
+	    
+	    DWORD processId;
+	    HANDLE hProcess;
+	    
+	    HWND hSaper = FindWindow("Saper", NULL); //hwnd okna
+	    
+	    if(hSaper) //jezeli gra jest uruchomiona
+	    {
+	        GetWindowThreadProcessId(hSaper, &processId); //pobieramy uchwyt
+	        hProcess = OpenProcess(PROCESS_VM_READ, false, processId);
+	        ReadProcessMemory(hProcess, (LPVOID)czas, &ilosc_czas, sizeof(long), 0); //odczytujemy
+	        ReadProcessMemory(hProcess, (LPVOID)miny, &ilosc_miny, sizeof(long), 0); //odczytujemy
+	        CloseHandle(hProcess);
+	    }
+	    
+	    cout << "Aktualna ilosc min: " << ilosc_miny << endl;
+	    cout << "Aktualna wartosc czasu: " << ilosc_czas << endl;
+	    
+	    system("PAUSE >nul");
+	    return(0);
 	}
 
 ## Zapisywanie wartości do pamięci
@@ -70,32 +70,32 @@ Wszystko odbywa się tak jak w przypadku odczytywania. Używamy funkcji *WritePr
 
 	#include <iostream>
 	#include <windows.h>
-
+	
 	using namespace std;
-
+	
 	int main()
 	{
-		int czas = 0x100579C; //adres czasu
-
-		int nowy_czas = 3;
-
-		DWORD processId;
-		HANDLE hProcess;
-
-		HWND hSaper = FindWindow("Saper", NULL); //hwnd okna
-
-		if(hSaper) //jezeli gra jest uruchomiona
-		{
-			GetWindowThreadProcessId(hSaper, &processId); //pobieramy uchwyt
-			hProcess = OpenProcess(PROCESS_VM_WRITE | PROCESS_VM_OPERATION, false, processId);
-			WriteProcessMemory(hProcess, (LPVOID)czas, &nowy_czas, sizeof(int), 0); //zapisujemy
-			CloseHandle(hProcess);
-		}
-
-		cout << "Czas zostal ustawiony na 3 sekundy" << endl;
-
-		system("PAUSE >nul");
-		return(0);
+	    int czas = 0x100579C; //adres czasu
+	
+	    int nowy_czas = 3;
+	
+	    DWORD processId;
+	    HANDLE hProcess;
+	
+	    HWND hSaper = FindWindow("Saper", NULL); //hwnd okna
+	
+	    if(hSaper) //jezeli gra jest uruchomiona
+	    {
+	        GetWindowThreadProcessId(hSaper, &processId); //pobieramy uchwyt
+	        hProcess = OpenProcess(PROCESS_VM_WRITE | PROCESS_VM_OPERATION, false, processId);
+	        WriteProcessMemory(hProcess, (LPVOID)czas, &nowy_czas, sizeof(int), 0); //zapisujemy
+	        CloseHandle(hProcess);
+	    }
+	
+	    cout << "Czas zostal ustawiony na 3 sekundy" << endl;
+	
+	    system("PAUSE >nul");
+	    return(0);
 	}
 
 ## Podsumowanie
