@@ -1,8 +1,7 @@
 ---
 title: RxJs - wycieki pamięci
 category: angular
-image: rxjs-wycieki-pamieci.png
-tags: [angular]
+thumbnail: rxjs-wycieki-pamieci.png
 published: 2020-06-13T:00:00:00Z
 author: karol-trybulec
 ---
