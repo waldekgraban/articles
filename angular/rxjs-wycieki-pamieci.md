@@ -3,7 +3,6 @@ title: RxJs - wycieki pamięci
 category: angular
 thumbnail: rxjs-wycieki-pamieci.png
 published: 2020-06-13T00:00:00Z
-author: karol-trybulec
 ---
 Wiele projektów Angularowych ma wycieki pamięci, które objawiają się coraz wolniejszym działaniem aplikacji. Z mojego doświadczenia wynika, że najczęściej jest za nie odpowiedzialne niewłaściwe użycie biblioteki RxJs. W tym artykule pokażę jak szukać wycieków pamięci oraz co zrobić, aby do nich nie dopuszczać.
 

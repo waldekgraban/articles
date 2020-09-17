@@ -3,7 +3,6 @@ title: Ukrywanie funkcji WinApi
 category: cpp
 thumbnail: ukrywanie-funkcji-winapi.png
 published: 2012-08-02T00:00:00Z
-author: karol-trybulec
 ---
 **Maskowanie funkcji WinAPI** może się nam przydać kiedy antywirusy internetowe czepiają się naszego programu. Dla testów napisałem program w C++, który podczas startu dodaje się do autostartu (rejestr) a następnie łączy się z losowym serwerem przez *winsock*. Po tych czynnościach program się zamykał. Przeskanowałem go na skanerze internetowym, wynik skanu to **8/43**. Aż 8 antywirusów wykryło zagrożenie.
 

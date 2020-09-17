@@ -3,7 +3,6 @@ title: Odczytywanie baseaddress
 category: cpp
 thumbnail: base-adress.png
 published: 2012-07-26T00:00:00Z
-author: karol-trybulec
 ---
 Poruszając temat **adresu bazowego** można by się rozpisać na dziesiątki stron, należało by zacząć od budowy plików wykonywalnych Windows, o nagłówkach i sekcjach (np. PE Header) oraz adresach RVA i VA (relatywnych i bezwzględnych). Informacje na ten temat można znaleźć w internecie. Ja podam kilka najważniejszych faktów.
 

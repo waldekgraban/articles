@@ -3,9 +3,7 @@ title: Dll Injection - wywoływanie funkcji
 category: cpp
 thumbnail: dll-injection.png
 published: 2013-01-04T00:00:00Z
-author: karol-trybulec
 ---
-
 **Dll Injection** jest to technika pozwalająca uruchomić dowolny kod w pamięci innego procesu, przez zmuszenie procesu do załadowania obcego pliku DLL. Istnieje wiele sposobów na wykonanie **Dll injection**, wszystkie mają pewne wady i zalety. W artykule opiszę w jaki sposób **wywołać funkcję innego procesu** posługując się **Dll Injection**.
 
 <!--more-->

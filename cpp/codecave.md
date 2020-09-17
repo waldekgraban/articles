@@ -3,7 +3,6 @@ title: CodeCave
 category: cpp
 thumbnail: codecave.png
 published: 2012-08-07T00:00:00Z
-author: karol-trybulec
 ---
 Każda uruchomiona aplikacja posiada swoją pamięć (pamięć procesu). Technika **DllInjection** pozwala programiście na wstrzyknięcie kodu do uruchomionego procesu, dzięki czemu można poszerzyć go o nowe funkcje, lub wywoływać istniejące funkcje procesu w dowolnym momencie. Jedną z wielu technik wstrzykiwania kodu jest korzystanie z **codecave**.
 

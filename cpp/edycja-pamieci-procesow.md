@@ -3,7 +3,6 @@ title: Edycja pamięci procesów
 category: cpp
 thumbnail: edycja-pamieci-procesow.png
 published: 2012-07-25T00:00:00Z
-author: karol-trybulec
 ---
 Windows udostępnia nam funkcje pozwalające odczytywać i zapisywać pamięć innych procesów. Służą do tego **ReadProcessMemory** i **WriteProcessMemory**. Przed odczytaniem pamięci procesu musimy uzyskać jego uchwyt (HANDLE) i posiadać odpowiednie prawa dostępu. Najlepszym darmowym programem do operacji na pamięci procesu jest **CheatEngine** oraz **TSearch**. Naszą aplikacją testową będzie Saper, ponieważ tę grę każdy posiada.
 
