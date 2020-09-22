@@ -8,7 +8,7 @@ Programiści często zmieniają pracę i **często uczestniczą w rozmowach rekr
 
 <!--more-->
 
-### Rozmowa techniczna
+## Rozmowa techniczna
 
 Głównym etapem rozmowy rekrutacyjnej na stanowisko programisty jest rozmowa techniczna. Polega ona na tym, aby odpowiadać na pytania zadawane przez osobę techniczną, która nas rekrutuje. Przeważnie jest to jakiś starszy programista lub starszy projektant systemowy. Jego zadanie jest proste - sprawdzić czy wiedza na temat technologii wpisanych w CV jest wystarczająca na dane stanowisko. **Ten etap jest kluczowy** i praktycznie decyduje o zatrudnieniu bądź jego braku.
 
@@ -22,7 +22,7 @@ Podczas rozmowy technicznej mogą zostać poruszone następujące kwestie:
 
 To, które pytania zostaną zadane oczywiście **zależy od profilu stanowiska na jakie aplikujesz**. Programiści niskopoziomowi usłyszą więcej pytań o algorytmach, backendowcy o wzorcach projektowych, a tzw. programiści full-stack często dostają pytania architektoniczne z bardzo szerokiego przekroju technologii (czyli jak przy użyciu kilku technologii na raz osiągnąć daną rzecz).
 
-#### Pytanie o dotychczasowe projekty
+### Pytanie o dotychczasowe projekty
 
 Jest to bardzo ważne pytanie, z czego wiele osób nie zdaje sobie sprawy. Absolutnie nie jest to pytanie na rozgrzewkę, aby pogadać o czymś "luźnym". Bo przecież wydawać by się mogło, że ktoś nie może Cię zagiąć pytaniami o projekt, o istnieniu którego nie ma pojęcia? - nic bardziej mylnego!
 
@@ -32,7 +32,7 @@ Jeśli natomiast od podszewki wytłumaczysz całą architekturę projektu, najwa
 
 To czy byłeś słaby czy dobry, albo lepiej **czy byłeś kimś znaczącym czy tez nie**, wyjdzie właśnie podczas tego pytania. Oczywiście nie ma nic złego w osobach dostających prostsze zadania (np. stażyści lub juniorzy). Każdy kiedyś zdobędzie większe doświadczenie ale wszystko wymaga odpowiedniej ilości czasu. Jednak bez względu na to jaką pozycję zajmowałeś w dotychczasowym projekcie, idąc do nowej firmy lepiej zaprezentować się jako ktoś mocny.
 
-#### Rola osoby technicznej
+### Rola osoby technicznej
 
 Należy zdać sobie sprawę, że osoba techniczna **ma największy wpływ na to, czy zostaniesz zatrudniony**. Dlatego tak ważne jest aby umieć opowiadać o poprzednich projektach, a także aby dobrze wypaść na reszcie pytań technicznych.
 
@@ -40,29 +40,29 @@ Czy wiesz, dlaczego tak jest? Osoba techniczna na rozmowie **to bardzo często l
 
 Z rekruterem sprawdzającym umiejętności miękkie, języki obce itd. (czyli tzw. pracownik HR) nie musisz złapać żadnej szczególnej więzi. Prawdopodobnie więcej go w życiu nie zobaczysz. W zależności od polityki firmy jego opinia raczej nie jest kluczowa jeśli chodzi o zatrudnienie, jednak o tym będzie w kolejnych akapitach.
 
-### Osoba techniczna na rozmowie
+## Osoba techniczna na rozmowie
 
 Warto wspomnieć więcej i skupić się na osobie technicznej. Tak jak zostało napisane w poprzednim akapicie, osoba techniczna **to przeważnie lider zespołu, do którego zostaniesz przyjęty**. Tak po prostu musi być. Zawsze musi pojawić się osoba z danego projektu, aby mogła stwierdzić czy będziesz pasował do danego zespołu mentalnie a także pod względem umiejętności technicznych.
 
 Zasada ta spełniła się podczas wszystkich kilkunastu rozmów rekrutacyjnych, w których brałem udział. Daje Ci to bardzo ważnego asa w rękawie. Rozmowa rekrutacyjna jest po to aby firma mogła sprawdzić Ciebie, **a także abyś Ty mógł sprawdzić firmę**. Zwracaj szczególną uwagę na osobę techniczną i zadaj sobie cały czas pytanie: *"Czy chciałbym z tym gościem pracować?"* - bo prawdopodobnie będziesz musiał.
 
-#### Nieodpowiednia osoba techniczna
+### Nieodpowiednia osoba techniczna
 
 Za tytułem tego akapitu kryje się** przestroga dla Ciebie**.  Czasem wydaje mi się, że firmy informatyczne nie mają pojęcia jak kluczowa jest rola osoby technicznej, którą wysyłają na rekrutację.
 
 Niestety zdarza się, że pewne osoby zajmują stanowiska, których nie powinny zajmować. Czasem zespołem zarządza osoba, która nie powinna. Czasem najważniejsze zdanie należy do osoby, która nie ma największych umiejętności technicznych w danym projekcie. Jest to bardzo negatywne dla firmy a **dla Ciebie podczas rozmowy rekrutacyjnej powinno być sygnałem**, aby nie zaczynać z daną firmą współpracy.
 
-#### Przypadek 1: Osoba techniczna ma mniejszą wiedzę niż Ty
+### Przypadek 1: Osoba techniczna ma mniejszą wiedzę niż Ty
 
 Będąc na rozmowie rekrutacyjnej warto pytać i dowiadywać się maksymalnie dużo. Warto wykorzystać szansę na rozmowę jaką dostaliśmy. Osobiście **zawsze staram się jak najwięcej pogadać z osobą techniczną rekrutującą mnie**, ponieważ pozawala mi to uzyskać obraz teamu do jakiego zostanę w przyszłości przydzielony.
 
 Aby czegoś się dowiedzieć wystarczy starać się odbijać piłeczkę po każdym pytaniu technicznym. Przykładowo jeżeli dostaniesz pytanie o dany wzorzec projektowy, postaraj się go dogłębnie opisać, dać przykład użycia, opowiedzieć po co się go stosuje i od razu zapytaj *"czy też w projekcie mieli taki problem?"*.
 
-Takie wywiązywanie dyskusji nie jest złe. To nie cwaniactwo. **To szansa dla Ciebie na poznanie swojego przyszłego lidera**. Każda merytoryczna dyskusja osób technicznych to coś mega pozytywnego, szansa na podzielenie się wiedzą. Po kilku pytaniach oboje znacie swój potencjał techniczny i **oboje wiecie z kim macie do czynienia** - z kim przyjdzie wam współpracować.
+Takie wywiązywanie dyskusji nie jest złe. To nie cwaniactwo. **To szansa dla Ciebie na poznanie swojego przyszłego lidera**. Każda merytoryczna dyskusja osób technicznych to coś pozytywnego, szansa na podzielenie się wiedzą. Po kilku pytaniach oboje znacie swój potencjał techniczny i **oboje wiecie z kim macie do czynienia** - z kim przyjdzie wam współpracować.
 
 Jeżeli zdarzy się, że osoba rekrutująca zadaje Ci pytania, a Twoje wypowiedzi są tak rozbudowane, że osoba techniczna nie umie podjąć z Tobą żadnej dyskusji - powinien być to dla Ciebie sygnał ostrzegawczy. Możesz wtedy zakładać, że zatrudnienia w tej firmie szybko zaczniesz żałować.
 
-#### Przypadek 2: Osoba techniczna zadaje niemądre pytania
+### Przypadek 2: Osoba techniczna zadaje niemądre pytania
 
 Poniekąd ten akapit wiąże się z poprzednim, jednak **problem jest poważny i warty opisania**. Wyobraź sobie, że idziesz na rozmowę rekrutacyjną i strzelasz w stanowisko regular/senior. Masz sporą wiedzę, niezły bagaż doświadczenia, rzucasz duże oczekiwania finansowe. Następnie siadasz wygodnie w fotelu słyszysz pierwsze pytanie: *"czym różni się klasa od interfejsu?"*. Pojawia się tysiąc myśli na sekundę.
 
@@ -74,7 +74,7 @@ Rozmowy rekrutacyjnej nie można traktować jak sprawdzianu w szkole, który chc
 
 W takiej sytuacji można także przypuszczać, że **firma szuka kogoś innego niż Ty**, prawdopodobnie kogoś z mniejszym doświadczeniem. Już na samym początku zostajesz przez firmę niedoceniany. Niech w takich wypadkach nie zwiedzie Cię stawka, ponieważ tajemnicą nie jest, że w dużych korporacjach zdarza się, że ktoś zarabia dużo a niewiele robi.
 
-#### Przypadek 3: Szybka, prosta rekrutacja
+### Przypadek 3: Szybka, prosta rekrutacja
 
 Ten akapit, znowu, wiąże się z poprzednim. Rekrutacja na stanowisko programisty, moim zdaniem, nie powinna być zbyt krótka ani prosta. **W 30 minut nie da się sprawdzić potencjału kandydata**. Osobiście mam bardzo dobrą opinię o firmach, które przeprowadzają wieloetapowe rekrutacje. Moim zdaniem zespoły programistyczne w takich firmach są po prostu lepiej organizowane.
 
@@ -82,7 +82,7 @@ Jako programista mam świadomość swoich silnych i słabych stron. Moją słab�
 
 Idąc na rozmowę rekrutacyjną nie wiesz jaki jest potencjał Twojego przyszłego zespołu i **jakich kompetencji temu zespołowi brakuje**. To rolą firmy rekrutującej jest przeprowadzenie profesjonalnej i skutecznej weryfikacji Twoich zdolności. Na tych pojedynczych rekrutacjach poszczególnych osób budowane są całe zespoły stanowiące o sukcesie lub porażce.
 
-### Prośba o rozwiązanie zadania programistycznego
+## Prośba o rozwiązanie zadania programistycznego
 
 Bardzo często zdarza się, że firma prosi o rozwiązanie zadania rekrutacyjnego w ramach pierwszego etapu rekrutacji. Oj, na ten temat można teraz pisać dużo.. Wiele razy sam naciąłem się na takie zadania, wielu moich znajomych także. Według mnie zasada jest prosta:
 
@@ -97,7 +97,7 @@ Dlaczego tak jest? Firmy myślą, że za pomocą takiego zadania **poznają Twó
 
 Każdy .NETowiec pisze kod inaczej niż Javowiec. Jeśli ktoś pisze dużo w TypeScript totalnie nie spodoba się to JavaScriptowcowi. W każdym języku wszystko jest inne, wszystko ma inną konwencję nazywania klas, zmiennych, interfejsów, właściwości.
 
-#### Przykład z życia wzięty
+### Przykład z życia wzięty
 
 Kiedyś poświęciłem 4 godziny swojego cennego czasu aby rozwiązać zadanie rekrutacyjne. W języku C# napisałem klasę do parsowania zakresów dat (w bardzo dużym uproszczeniu). Oprócz zakresów dat miałem obsługiwać wszystkie możliwe opcje parsowania, strefy czasowe, formaty wprowadzania dat. **Kod był moim zdaniem idealny obiektowo**, kierowałem się zasadami SOLID, wszelkie zmienne były zahermetyzowane wewnątrz klasy. Pochwaliłem się nawet koledze w pracy - oboje stwierdziliśmy, że idealniej się już nie da.
 
@@ -107,13 +107,13 @@ Po kilku dniach otrzymałem odpowiedź: *"Wszystkie zmienne w klasie powinny by�
 
 Gdy przeczytałem tę wiadomość ręce mi opadły. Podpisał się pod nią "senior architect". Sprawdzając mój kod, prawdopodobnie, **nie odróżnił publicznej właściwości od publicznej zmiennej**. Już miałem napisać, że prywatna zmienna istnieje, tylko zostanie niejawnie utworzona przez kompilator, a uproszczona składania tworzenia właściwości w C#, de facto, zostanie rozwinięta do dwóch metod *set* i *get*. Utworzenie publicznego settera nie ma przecież nic wspólnego z utworzeniem publicznej zmiennej.. Stwierdziłem jednak, że nie ma sensu. Po zmarnowaniu kilku godzin na pisanie zadania stwierdziłem, że ocenia je osoba niekompetentna, **która skutecznie zniechęciła mnie do dalszej rekrutacji**. Grzecznie podziękowałem i odpuściłem rekrutację.
 
-### Umiejętności miękkie
+## Umiejętności miękkie
 
 Szczerze mówiąc, z mojego doświadczenia wynika, że **mało firm zwraca uwagę na tzw. umiejętności miękkie**. Wynika to z prostego faktu: programista jest od pisania dobrego kodu, czasem przeprowadza też analizy. Programista nierzadko uczestniczy w rozmowach z klientem jednak docelowo **od programisty nie wymaga się nienagannej aparycji i prezentacji** - bo jest tylko programistą. Sprzedać produkt i opowiadać o nim muszą osoby zajmujące inne stanowiska.
 
 Artykuły i rady mówiące o tym jak ważne są umiejętności miękkie w naszym zawodzie, nie znajdują odzwierciedlenia w przypadku moich doświadczeń. U programistów **przede wszystkim oceniana jest wiedza merytoryczna i doświadczenie**. Jest to główny czynnik przeważający o sukcesie zatrudnienia programisty bądź nie.
 
-### Podsumowanie
+## Podsumowanie
 
 Nie jest lekko, **rozmowy rekrutacyjne nie należą do najłatwiejszych**. Gdy trafimy na "zbyt trudną", to oczywiście nie dobrze, jednak często istnieje możliwość renegocjacji stawki jeśli nasza wiedza jest zbyt mała. Jeśli rozmowa jest "zbyt łatwa" uważaj na jaką firmę trafiłeś. **Może okazać się, że nie będziesz z niej zadowolony**. Szczególnie jeśli Twoja zmiana pracy podyktowana jest **chęcią zdobywania doświadczenia** a nie "wpłynięcia do spokojnego portu" i zarabiania pieniędzy.
 

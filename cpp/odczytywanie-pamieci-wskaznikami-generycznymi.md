@@ -20,7 +20,7 @@ Zmienna wskaźnika (czyli wskaźnik) to zmienna wskazująca na jakiś obszar pam
 	*(int*)wsk = 4321;              //rzutowanie na *int
 	cout << *(int*)wsk << endl;     //rzutowanie na *int
 
-Więcej o wskaźnikach dowiesz się z artykułu [wskaźniki C++](http://www.p-programowanie.pl/cpp/wskazniki/ "wskaźniki C++").
+Więcej o wskaźnikach dowiesz się z artykułu [wskaźniki C++](https://www.p-programowanie.pl/cpp/wskazniki/ "wskaźniki C++").
 
 ##  Odczytywanie pamięci i DLL Injection
 

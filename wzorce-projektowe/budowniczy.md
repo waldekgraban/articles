@@ -14,7 +14,10 @@ Na samym początku należy zdać sobie sprawę z tego, że istnieją dwie popula
 
 ## Po co używać wzorca budowniczy?
 
-Budowniczy ma za zadanie rozwiązać pewien powtarzający się problem programistyczny - konkretniej zapewnia **oddzielenie procesu inicjalizacji obiektu od jego reprezentacji**. Decydując się na użycie tego wzorca można osiągnąć następujące korzyści:
+**Wzorzec Budowniczy - to kreacyjny wzorzec projektowy**, którego zadaniem jest oddzielenie procesu tworzenia obiektu od jego reprezentacji.
+{: .alert-info} 
+
+Decydując się na użycie tego wzorca można osiągnąć następujące korzyści:
 
 - logika mówiąca o tym jak obiekt ma być zbudowany **będzie oddzielona od implementacji** tej logiki
 - spełnia zasadę **otwarty na rozbudowę, zamknięty na modyfikacje** (*open/closed principle*) - łatwo dodać do kodu nowych budowniczych
@@ -134,7 +137,7 @@ Widząc pierwszy raz **implementację wzorca budowniczy** można odnieść wraż
 
 - najważniejszymi elementami wzorca jest *kierownik* oraz *konkretny budowniczy*. Kierownik skupia logikę budowania, konkretny budowniczy skupia implementację tej logikii
 - *budowniczy* jest nic nieznaczącym interfejsem (w przykładzie klasa abstrakcyjna) aby zapewnić wspólny interfejs polimorficzny dla konkretnych implementacji budowniczych (spełnienie 4 zasady SOLID **odwrócenie zależności**)
-- nie możemy zrezygnować z *kierownika*, chociaż wydaje się nadmiarowy. Niektóre implementacje tego wzorca rezygnują z niego jednak nie jest to wtedy wzorzec budowniczy zaprezentowany przez GoF.
+- nie możemy zrezygnować z *kierownika*, chociaż wydaje się nadmiarowy. Niektóre implementacje tego wzorca rezygnują z niego, jednak nie jest to wtedy wzorzec budowniczy zaprezentowany przez GoF.
 - dzięki oddzieleniu logiki od implementacji, możemy zmienić logikę budowania obiektu w jednym miejscu (*kierownik*) i zostanie ona zmieniona w całym systemie - w każdym budowniczym, a one nie będą tego świadome
 - można dojść do wniosku, że połączenie *kierownika* z *konkretnym budowniczym* bardzo przypominałoby fabrykę abstrakcyjną
 

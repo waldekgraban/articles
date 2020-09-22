@@ -58,7 +58,7 @@ W ten sposób możesz śledzić argumenty wszystkich wywoływanych funkcji w pro
 
 Posiadamy adres funkcji, upewniliśmy się dzięki śledzeniu argumentów za co jest odpowiedzialna. Funkcję można wywołać w prosty sposób za pomocą Dll Injection.
 
-W tym celu musimy utworzyć wskaźnik do funkcji. Dokładną metodę tworzenia **wskaźników na funkcje **opisałem w artykule [Ukrywanie funkcji WinApi](http://www.p-programowanie.pl/cpp/ukrywanie-funkcji-winapi/).
+W tym celu musimy utworzyć wskaźnik do funkcji. Dokładną metodę tworzenia **wskaźników na funkcje **opisałem w artykule [Ukrywanie funkcji WinApi](https://www.p-programowanie.pl/cpp/ukrywanie-funkcji-winapi/).
 
 Każdy wskaźnik na funkcję poprzedzamy rozkazem *typedef*. Następnie podajemy co zwraca funkcja w naszym przypadku może być *void*. Otwieramy nawias, piszemy gwiazdkę a po gwiazdce nazwę wskaźnika. W przypadku DLL Injection wymagane jest także dodanie *__stdcall* przed gwiazdką lub *__thiscall*. W następnym nawiasie ustawiamy ilość parametrów, wymieniając po przecinku **ich typy (bez nazw!).**
 

@@ -151,7 +151,7 @@ Stworzenie najprostszego okna dialogowego wymaga następujących kroków:
 
 Okienko zostanie wyświetlone po kliknięciu dodanej przez nas pozycji menu. Po utworzeniu **dialogboxa** tworzymy odpowiednie kontrolki. Kilka etykiet, przycisk i timer. Etykiety będą wyświetlały aktualne informacje pobrane z pamięci, przycisk będzie odpowiadał za reset aktualnego czasu. Timer będzie odświeżał informacje i za pomocą _SendMessage_ wyświetlał je na etykietach.
 
-Niezbędne będzie odczytywanie wartości odpowiednich adresów w pamięci, a także ich **modyfikacja**. Ponieważ po wykonaniu **Dll Injection** będziemy znajdować się w wątku w obrębie procesu gry, nie będziemy używać _Read/WriteProcessMemory_. [Będziemy modyfikować pamięć posługując się wskaźnikami generycznymi.](http://www.p-programowanie.pl/cpp/odczytywanie-pamieci-wskaznikami-generycznymi/ "edycja pamięci C++")<code class="cpp"></code>
+Niezbędne będzie odczytywanie wartości odpowiednich adresów w pamięci, a także ich **modyfikacja**. Ponieważ po wykonaniu **Dll Injection** będziemy znajdować się w wątku w obrębie procesu gry, nie będziemy używać _Read/WriteProcessMemory_. [Będziemy modyfikować pamięć posługując się wskaźnikami generycznymi.](https://www.p-programowanie.pl/cpp/odczytywanie-pamieci-wskaznikami-generycznymi/ "edycja pamięci C++")<code class="cpp"></code>
 
 	#include <windows.h>
 	
