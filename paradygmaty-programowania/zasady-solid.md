@@ -493,7 +493,7 @@ Warto dodać, że często stosowany jest wzorzec wstrzykiwania zależności (ang
 
 Dzięki takiemu automatycznemu wstrzyknięciu klasa *BookController* nie wie nic o klasie *BookRepository*. Będzie na niej niejawnie operować, jednak nie bezpośrednio, a pośrednio poprzez interfejs *IRepository<T>*.
 
-Najważniejszą rzeczą jaką musisz zapamiętać jest to, że zasada odwrócenia zależności pomaga nam w  większym stopniu pracować na abstrakcji. Natomiast wstrzykiwanie zależności do wzorzec projektowy, który możemy dodatkowo użyć, aby jeszcze bardziej zmniejszyć powiązania między klasami.
+Najważniejszą rzeczą jaką musisz zapamiętać jest to, że zasada odwrócenia zależności pomaga nam w  większym stopniu pracować na abstrakcji. Natomiast wstrzykiwanie zależności to wzorzec projektowy, który możemy dodatkowo użyć, aby jeszcze bardziej zmniejszyć powiązania między klasami.
 
 ## Dlaczego warto przestrzegać zasad SOLID?
 
